@@ -1,8 +1,12 @@
 import React from "react";
 import { MoonLoader } from "react-spinners";
 
-export function loadComponent(loading, LoadingComponent, Component) {
-  if (loading === false) {
+export function loadComponent(
+  loading: boolean,
+  LoadingComponent: JSX.Element,
+  Component: JSX.Element
+) {
+  if (!loading) {
     return Component;
   } else {
     return LoadingComponent;
@@ -26,12 +30,12 @@ export const LoadingComponent = () => {
   );
 };
 
-export const WINDOW_WIDTH = window.innerWidth;
-export const WINDOW_HEIGHT = window.innerHeight;
+export const WINDOW_WIDTH: number = window.innerWidth;
+export const WINDOW_HEIGHT: number = window.innerHeight;
 
-export const isDuplicate = (arr, value) => {
+export const isDuplicate = (arr: number[], value: number) => {
   return arr.includes(value);
 };
-export const arrFilter = (arr, value) => {
-  return arr.filter((item) => item !== value);
+export const arrFilter = (arr: number[], value: number) => {
+  return arr.filter((item: number) => item !== value);
 };

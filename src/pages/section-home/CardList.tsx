@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import React from "react";
+import { Box, Typography, IconButton, Slide } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 import { arrFilter, WINDOW_WIDTH } from "../../lib/util";
@@ -7,12 +7,22 @@ import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
 import { favoriteAtom } from "../../stores";
 import { isDuplicate } from "../../lib/util";
+import { Result } from "../../lib/types";
 
-const CardList = ({ tracks }) => {
+type CardListProps = {
+  tracks: Result[];
+};
+
+type CardTrackProps = {
+  track: Result;
+  index: number;
+};
+
+const CardList: React.FC<CardListProps> = ({ tracks }) => {
   const [favoriteList] = useAtom(favoriteAtom);
   const setFavorite = useUpdateAtom(favoriteAtom);
 
-  const CardTrack = ({ track, index }) => {
+  const CardTrack = ({ track, index }: CardTrackProps) => {
     return (
       <Card
         key={index}
@@ -44,13 +54,6 @@ const CardList = ({ tracks }) => {
                 if (!isDuplicate(favoriteList, track.trackId))
                   setFavorite([...favoriteList, track.trackId]);
                 else setFavorite(arrFilter(favoriteList, track.trackId));
-                console.log(favoriteList);
-                setTimeout(() => {
-                  localStorage.setItem(
-                    "itunes-playground-favorite",
-                    JSON.stringify(favoriteList)
-                  );
-                }, 200);
               }}
             >
               <Favorite
@@ -89,39 +92,41 @@ const CardList = ({ tracks }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        mx: 5,
-        mt: 3,
-      }}
-    >
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {tracks.map(
-          (track, index) =>
-            index % 3 === 0 && (
-              <CardTrack track={track} index={index} key={index} />
-            )
-        )}
+    <Slide direction="up" in timeout={700}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          mx: 5,
+          mt: 3,
+        }}
+      >
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          {tracks.map(
+            (track: any, index: number) =>
+              index % 3 === 0 && (
+                <CardTrack track={track} index={index} key={index} />
+              )
+          )}
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", mt: 7 }}>
+          {tracks.map(
+            (track: any, index: number) =>
+              index % 3 === 1 && (
+                <CardTrack track={track} index={index} key={index} />
+              )
+          )}
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          {tracks.map(
+            (track: any, index: number) =>
+              index % 3 === 2 && (
+                <CardTrack track={track} index={index} key={index} />
+              )
+          )}
+        </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", mt: 7 }}>
-        {tracks.map(
-          (track, index) =>
-            index % 3 === 1 && (
-              <CardTrack track={track} index={index} key={index} />
-            )
-        )}
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {tracks.map(
-          (track, index) =>
-            index % 3 === 2 && (
-              <CardTrack track={track} index={index} key={index} />
-            )
-        )}
-      </Box>
-    </Box>
+    </Slide>
   );
 };
 

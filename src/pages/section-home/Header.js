@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Typography, InputBase } from "@mui/material";
+import { Typography, InputBase, Box } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Toolbar } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { Menu, Search, Favorite } from "@mui/icons-material";
 
 import { useUpdateAtom } from "jotai/utils";
-import { keywordAtom } from "../../stores";
+import { defaultKeyword, keywordAtom } from "../../stores";
 
 const Header = () => {
   const [input, setInput] = useState("");
@@ -24,13 +24,16 @@ const Header = () => {
         >
           <Menu />
         </IconButton>
-        <Typography
-          variant="h5"
-          color="black"
-          sx={{ fontWeight: "bold", flexGrow: 1 }}
-        >
-          iTunes - Playground
-        </Typography>
+        <Box sx={{ flexGrow: 1 }}>
+          <button
+            onClick={() => setKeyword(defaultKeyword)}
+            style={{ backgroundColor: "white", border: "none" }}
+          >
+            <Typography variant="h5" color="black" sx={{ fontWeight: "bold" }}>
+              iTunes - Playground
+            </Typography>
+          </button>
+        </Box>
         <SearchWrapper>
           <SearchIconWrapper>
             <Search />

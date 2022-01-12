@@ -1,9 +1,13 @@
 import axios from "axios";
 import qs from "qs";
 
-const domain = "https://itunes.apple.com";
+const domain: string = "https://itunes.apple.com";
 
-export const getSearchTrack = (keyword, limit, entity) => {
+export const getSearchTrack = (
+  keyword: string,
+  limit: number,
+  entity?: string
+): Promise<any> => {
   const queryString = qs.stringify({
     term: keyword,
     limit: limit,
