@@ -9,7 +9,7 @@ import { useUpdateAtom } from "jotai/utils";
 import { defaultKeyword, keywordAtom } from "../../stores";
 
 const Header = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
   const setKeyword = useUpdateAtom(keywordAtom);
 
   return (

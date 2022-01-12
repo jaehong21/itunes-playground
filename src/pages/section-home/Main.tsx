@@ -20,28 +20,35 @@ const Main = () => {
       {keyword === defaultKeyword ? (
         <LandingPage />
       ) : (
-        <Typography
-          component="div"
-          fontSize="20px"
-          sx={{ mx: 9, alignItems: "center" }}
-        >
-          Search result for :{" "}
+        <>
           <Typography
             component="div"
-            fontSize="22px"
-            fontWeight="bold"
-            sx={{ display: "inline-block" }}
+            fontSize="20px"
+            sx={{ mx: 9, alignItems: "center" }}
           >
-            {keyword}
+            Search result for :{" "}
+            <Typography
+              component="div"
+              fontSize="22px"
+              fontWeight="bold"
+              sx={{ display: "inline-block" }}
+            >
+              {keyword}
+            </Typography>
           </Typography>
-        </Typography>
-      )}
-      {loadComponent(
-        isLoading,
-        <Collapse in>
-          <LoadingComponent />
-        </Collapse>,
-        data && <CardList tracks={data.data.results} />
+          {loadComponent(
+            isLoading,
+            <Collapse in>
+              <LoadingComponent />
+            </Collapse>,
+            data && (
+              <CardList
+                tracks={data.data.results}
+                count={data.data.resultCount}
+              />
+            )
+          )}
+        </>
       )}
     </Box>
   );

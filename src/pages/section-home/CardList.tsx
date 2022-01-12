@@ -2,15 +2,15 @@ import React from "react";
 import { Box, Typography, IconButton, Slide } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
-import { arrFilter, WINDOW_WIDTH } from "../../lib/util";
+import { isDuplicate, arrFilter } from "../../lib/util";
 import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
 import { favoriteAtom } from "../../stores";
-import { isDuplicate } from "../../lib/util";
 import { Result } from "../../lib/types";
 
 type CardListProps = {
   tracks: Result[];
+  count: number;
 };
 
 type CardTrackProps = {
@@ -18,7 +18,7 @@ type CardTrackProps = {
   index: number;
 };
 
-const CardList: React.FC<CardListProps> = ({ tracks }) => {
+const CardList: React.FC<CardListProps> = ({ tracks, count }) => {
   const [favoriteList] = useAtom(favoriteAtom);
   const setFavorite = useUpdateAtom(favoriteAtom);
 
@@ -29,7 +29,6 @@ const CardList: React.FC<CardListProps> = ({ tracks }) => {
         raised={true}
         sx={{
           display: "flex",
-          width: WINDOW_WIDTH / 3.7,
           mb: 4,
           mx: 4,
           justifyContent: "space-between",
@@ -83,7 +82,7 @@ const CardList: React.FC<CardListProps> = ({ tracks }) => {
         </Box>
         <CardMedia
           component="img"
-          sx={{ position: "relative", width: 151 }}
+          sx={{ position: "relative", minWidth: 150 }}
           image={track.artworkUrl100}
           alt="No Image"
         />
@@ -101,7 +100,20 @@ const CardList: React.FC<CardListProps> = ({ tracks }) => {
           mt: 3,
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        {count === 0 && (
+          <Box
+            sx={{
+              display: "flex",
+              mx: 20,
+            }}
+          >
+            <img
+              style={{ maxWidth: 700 }}
+              src="https://www.medplus.vn/images/404.png"
+            />
+          </Box>
+        )}
+        <Box sx={{ display: "flex", flexDirection: "column", width: "40%" }}>
           {tracks.map(
             (track: any, index: number) =>
               index % 3 === 0 && (
@@ -109,7 +121,14 @@ const CardList: React.FC<CardListProps> = ({ tracks }) => {
               )
           )}
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "column", mt: 7 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "40%",
+            mt: 7,
+          }}
+        >
           {tracks.map(
             (track: any, index: number) =>
               index % 3 === 1 && (
@@ -117,7 +136,7 @@ const CardList: React.FC<CardListProps> = ({ tracks }) => {
               )
           )}
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", width: "40%" }}>
           {tracks.map(
             (track: any, index: number) =>
               index % 3 === 2 && (

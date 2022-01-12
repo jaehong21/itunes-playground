@@ -30,9 +30,6 @@ export const LoadingComponent = () => {
   );
 };
 
-export const WINDOW_WIDTH: number = window.innerWidth;
-export const WINDOW_HEIGHT: number = window.innerHeight;
-
 export const isDuplicate = (arr: number[], value: number) => {
   return arr.includes(value);
 };
