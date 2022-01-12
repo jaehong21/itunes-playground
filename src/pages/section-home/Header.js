@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { useState } from "react";
 import { Typography, InputBase } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Toolbar } from "@mui/material";

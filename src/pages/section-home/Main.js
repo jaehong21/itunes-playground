@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import { getSearchTrack } from "../../lib/api";
 import { useAtom } from "jotai";
@@ -19,7 +19,7 @@ const Main = () => {
         <LoadingComponent />
       ) : (
         <Typography variant="div" fontSize="25px" sx={{ mx: 9 }}>
-          Search result for :
+          Search result for :{" "}
           <Typography
             variant="div"
             fontSize="30px"

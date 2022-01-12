@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
-import { Favorite, Airplay } from "@mui/icons-material";
-import { WINDOW_WIDTH } from "../../lib/util";
+import { Favorite } from "@mui/icons-material";
+import { arrFilter, WINDOW_WIDTH } from "../../lib/util";
+import { useAtom } from "jotai";
+import { useUpdateAtom } from "jotai/utils";
+import { favoriteAtom } from "../../stores";
+import { isDuplicate } from "../../lib/util";
 
 const CardList = ({ tracks }) => {
+  const [favoriteList] = useAtom(favoriteAtom);
+  const setFavorite = useUpdateAtom(favoriteAtom);
+
   const CardTrack = ({ track, index }) => {
     return (
       <Card
@@ -32,8 +39,28 @@ const CardList = ({ tracks }) => {
             </Typography>
           </CardContent>
           <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-            <IconButton>
-              <Favorite />
+            <IconButton
+              onClick={() => {
+                if (!isDuplicate(favoriteList, track.trackId))
+                  setFavorite([...favoriteList, track.trackId]);
+                else setFavorite(arrFilter(favoriteList, track.trackId));
+                console.log(favoriteList);
+                setTimeout(() => {
+                  localStorage.setItem(
+                    "itunes-playground-favorite",
+                    JSON.stringify(favoriteList)
+                  );
+                }, 200);
+              }}
+            >
+              <Favorite
+                sx={{
+                  color: isDuplicate(favoriteList, track.trackId)
+                    ? "#FD1D1D"
+                    : null,
+                  opacity: 0.7,
+                }}
+              />
             </IconButton>
             <IconButton>
               <a
@@ -41,12 +68,12 @@ const CardList = ({ tracks }) => {
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  fontSize: "17px",
+                  fontSize: "14px",
                   textDecoration: "none",
                   color: "gray",
                 }}
               >
-                {track.trackViewUrl.substring(0, 20)}
+                {track.trackViewUrl.substring(0, 29)}...
               </a>
             </IconButton>
           </Box>

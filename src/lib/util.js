@@ -28,3 +28,10 @@ export const LoadingComponent = () => {
 
 export const WINDOW_WIDTH = window.innerWidth;
 export const WINDOW_HEIGHT = window.innerHeight;
+
+export const isDuplicate = (arr, value) => {
+  return arr.includes(value);
+};
+export const arrFilter = (arr, value) => {
+  return arr.filter((item) => item !== value);
+};
