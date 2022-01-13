@@ -1,5 +1,3 @@
-//   const welcome = Convert.toWelcome(json);
-
 export interface responseType {
   resultCount?: number;
   results?: Result[];
@@ -59,6 +57,10 @@ export enum Currency {
 
 export enum Kind {
   Song = "song",
+  Book = "book",
+  Album = "album",
+  Video = "music-video",
+  Tv = "tv-episode",
 }
 
 export enum WrapperType {

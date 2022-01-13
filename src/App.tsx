@@ -1,7 +1,9 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Provider } from "jotai";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Favorite from "./pages/Favorite";
 
 function App() {
   const queryClient = new QueryClient();
@@ -9,7 +11,10 @@ function App() {
   return (
     <Provider>
       <QueryClientProvider client={queryClient}>
-        <Home />
+        <Routes>
+          <Route element={<Home />} path="/" />
+          <Route element={<Favorite />} path="/favorite" />
+        </Routes>
       </QueryClientProvider>
     </Provider>
   );

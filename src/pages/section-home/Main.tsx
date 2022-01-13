@@ -2,24 +2,33 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getSearchTrack } from "../../lib/api";
 import { useAtom } from "jotai";
-import { defaultKeyword, keywordAtom, limitAtom } from "../../stores";
+import {
+  defaultKeyword,
+  entityAtom,
+  keywordAtom,
+  limitAtom,
+  offsetAtom,
+} from "../../stores";
 import { loadComponent, LoadingComponent } from "../../lib/util";
-import { Box, Typography, Slide, Collapse } from "@mui/material";
+import { Box, Typography, Collapse } from "@mui/material";
 import CardList from "./CardList";
 import LandingPage from "./LandingPage";
 
 const Main = () => {
   const [keyword] = useAtom(keywordAtom);
   const [limit] = useAtom(limitAtom);
-  const { isLoading, error, data } = useQuery<any | Error>([keyword], () =>
-    getSearchTrack(keyword, limit)
+  const [entity] = useAtom(entityAtom);
+  const [offset] = useAtom(offsetAtom);
+
+  const { isLoading, error, data } = useQuery<any | Error>(
+    [keyword, entity, limit, offset],
+    () => getSearchTrack(keyword, entity, limit, offset)
   );
 
   return (
     <Box sx={{ mt: 9.5 }}>
-      {keyword === defaultKeyword ? (
-        <LandingPage />
-      ) : (
+      <LandingPage />
+      {!(keyword === defaultKeyword) && (
         <>
           <Typography
             component="div"
@@ -36,17 +45,12 @@ const Main = () => {
               {keyword}
             </Typography>
           </Typography>
-          {loadComponent(
-            isLoading,
-            <Collapse in>
-              <LoadingComponent />
-            </Collapse>,
-            data && (
-              <CardList
-                tracks={data.data.results}
-                count={data.data.resultCount}
-              />
-            )
+          {loadComponent(isLoading, <LoadingComponent />, <></>)}
+          {data && (
+            <CardList
+              tracks={data.data.results}
+              count={data.data.resultCount}
+            />
           )}
         </>
       )}

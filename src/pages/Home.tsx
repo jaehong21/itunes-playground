@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./section-home/Header";
+import Header from "../components/Header";
 import Main from "./section-home/Main";
 
 const Home: React.FC = () => {

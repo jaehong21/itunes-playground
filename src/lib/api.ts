@@ -5,13 +5,22 @@ const domain: string = "https://itunes.apple.com";
 
 export const getSearchTrack = (
   keyword: string,
-  limit: number,
-  entity?: string
-): Promise<any> => {
+  entity?: string,
+  limit?: number,
+  offset?: number
+): any => {
   const queryString = qs.stringify({
     term: keyword,
-    limit: limit,
-    entity: "song",
+    country: "KR",
+    entity,
+    limit,
+    offset,
   });
-  return axios.get(`${domain}/search/?${queryString}`);
+  console.log(keyword, entity, limit, offset);
+  try {
+    return axios.get(`${domain}/search/?${queryString}`);
+  } catch (e) {
+    alert("Network Error: Please try again");
+    console.log(e);
+  }
 };
