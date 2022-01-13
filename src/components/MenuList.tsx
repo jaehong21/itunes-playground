@@ -10,6 +10,7 @@ import {
   ListSubheader,
   Slider,
 } from "@mui/material";
+import { colors } from "@mui/material";
 import {
   Album,
   ExpandLess,
@@ -112,7 +113,7 @@ const MenuList: React.FC<MenuListProps> = ({ open, setOpen }) => {
           <Collapse in={collapse.limit} timeout="auto" unmountOnExit>
             <ListItem>
               <Slider
-                sx={{ mx: 1 }}
+                sx={{ mx: 1, color: colors.pink[300] }}
                 defaultValue={9}
                 valueLabelDisplay="auto"
                 step={1}

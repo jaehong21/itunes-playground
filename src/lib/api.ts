@@ -11,7 +11,7 @@ export const getSearchTrack = (
 ): any => {
   const queryString = qs.stringify({
     term: keyword,
-    country: "KR",
+    country: "US",
     entity,
     limit,
     offset,
