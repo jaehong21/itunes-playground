@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
-  Divider,
+  Collapse,
   Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
+  Slider,
 } from "@mui/material";
-import { People } from "@mui/icons-material";
+import {
+  Album,
+  ExpandLess,
+  ExpandMore,
+  Language,
+  LibraryMusic,
+  MenuBook,
+  QueueMusic,
+  Tv,
+  Videocam,
+  Web,
+} from "@mui/icons-material";
 
 interface MenuListProps {
   open: boolean;
@@ -22,22 +34,119 @@ const MenuList: React.FC<MenuListProps> = ({ open, setOpen }) => {
   };
 
   const Menu: React.FC = () => {
+    type collapseType = {
+      entity: boolean;
+      limit: boolean;
+      country: boolean;
+    };
+
+    const [collapse, setCollapse] = useState<collapseType>({
+      entity: false,
+      limit: false,
+      country: false,
+    });
+
     return (
-      <Box
-        sx={{ width: 250, backgroundColor: "white" }}
-        role="presentation"
-        onClick={() => toggleDrawer(false)}
-        onKeyDown={() => toggleDrawer(false)}
-      >
+      <Box sx={{ width: 270, backgroundColor: "white" }} role="presentation">
         <List>
-          <ListItem button>
+          <ListSubheader>Settings</ListSubheader>
+          <ListItem
+            button
+            onClick={() =>
+              setCollapse({ ...collapse, entity: !collapse.entity })
+            }
+          >
             <ListItemIcon>
-              <People />
+              <LibraryMusic />
             </ListItemIcon>
-            <ListItemText primary="This is It" />
+            <ListItemText primary="Song type" />
+            {collapse.entity ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
+          <Collapse
+            in={collapse.entity}
+            timeout="auto"
+            unmountOnExit
+            onClick={() => toggleDrawer(false)}
+          >
+            <ListItem button>
+              <ListItemIcon>
+                <QueueMusic sx={{ pl: 4 }} />
+              </ListItemIcon>
+              <ListItemText sx={{ pl: 2 }} primary="Song" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <MenuBook sx={{ pl: 4 }} />
+              </ListItemIcon>
+              <ListItemText sx={{ pl: 2 }} primary="Book" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Tv sx={{ pl: 4 }} />
+              </ListItemIcon>
+              <ListItemText sx={{ pl: 2 }} primary="TV-Episode" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Album sx={{ pl: 4 }} />
+              </ListItemIcon>
+              <ListItemText sx={{ pl: 2 }} primary="Album" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <Videocam sx={{ pl: 4 }} />
+              </ListItemIcon>
+              <ListItemText sx={{ pl: 2 }} primary="Music-Video" />
+            </ListItem>
+          </Collapse>
+          <ListItem
+            button
+            onClick={() => setCollapse({ ...collapse, limit: !collapse.limit })}
+          >
+            <ListItemIcon>
+              <Web />
+            </ListItemIcon>
+            <ListItemText primary="Contents per page" />
+            {collapse.limit ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={collapse.limit} timeout="auto" unmountOnExit>
+            <ListItem>
+              <Slider
+                sx={{ mx: 1 }}
+                defaultValue={9}
+                valueLabelDisplay="auto"
+                step={1}
+                min={3}
+                max={40}
+              />
+            </ListItem>
+          </Collapse>
+          <ListItem
+            button
+            onClick={() =>
+              setCollapse({ ...collapse, country: !collapse.country })
+            }
+          >
+            <ListItemIcon>
+              <Language />
+            </ListItemIcon>
+            <ListItemText primary="Location" />
+            {collapse.country ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse
+            in={collapse.country}
+            timeout="auto"
+            unmountOnExit
+            onClick={() => toggleDrawer(false)}
+          >
+            <ListItem button sx={{ pl: 5 }}>
+              <ListItemText primary="United States" />
+            </ListItem>
+            <ListItem button sx={{ pl: 5 }}>
+              <ListItemText primary="Republic of Korea" />
+            </ListItem>
+          </Collapse>
         </List>
-        <Divider />
       </Box>
     );
   };
