@@ -1,8 +1,8 @@
 import React from "react";
 import AppHeader from "../components/AppHeader";
-import CardList from "../components/CardList";
+import CardList from "../components/Card/CardList";
 import { useAtom } from "jotai";
-import { favoriteAtom } from "../stores";
+import { favoriteAtom } from "../store/store";
 import SaveButton from "../components/SaveButton";
 
 const Favorite: React.FC = () => {

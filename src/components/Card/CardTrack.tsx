@@ -9,14 +9,13 @@ import {
   easing,
 } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
-import styled from "styled-components";
-import { Result } from "../lib/types";
-import { favoriteAtom } from "../stores";
+import { Result } from "../../lib/types";
+import { favoriteAtom } from "../../store/store";
 import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
-import { arrFilter, isDuplicate } from "../lib/util";
-import Icon from "./Icon";
-import Shortcut from "./Shortcut";
+import { arrFilter, isDuplicate } from "../../lib/util";
+import Icon from "../Icon";
+import Shortcut from "../Shortcut";
 
 interface Props {
   track: Result;

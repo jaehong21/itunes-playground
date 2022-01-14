@@ -2,36 +2,35 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getSearchTrack } from "../../lib/api";
 import { useAtom } from "jotai";
-import {
-  defaultKeyword,
-  entityAtom,
-  keywordAtom,
-  limitAtom,
-  offsetAtom,
-} from "../../stores";
+import { defaultParam, paramAtom } from "../../store/store";
 import { loadComponent, LoadingComponent } from "../../lib/util";
 import { Box } from "@mui/material";
-import CardList from "../../components/CardList";
+import CardList from "../../components/Card/CardList";
 import LandingPage from "./LandingPage";
 import SearchResult from "./SearchResult";
 
 const Main = () => {
-  const [keyword] = useAtom(keywordAtom);
-  const [limit] = useAtom(limitAtom);
-  const [entity] = useAtom(entityAtom);
-  const [offset] = useAtom(offsetAtom);
+  const [param] = useAtom(paramAtom);
 
   const { isLoading, data } = useQuery<any | Error>(
-    [keyword, entity, limit, offset],
-    () => getSearchTrack(keyword, entity, limit, offset)
+    [param.keyword, param.country, param.entity, param.limit, param.offset],
+    () =>
+      getSearchTrack(
+        param.keyword,
+        param.country,
+        param.entity,
+        param.limit,
+        param.offset
+      )
   );
 
   return (
     <Box sx={{ mt: 9.5 }}>
-      <LandingPage />
-      {!(keyword === defaultKeyword) && (
+      {param.keyword === defaultParam.keyword ? (
+        <LandingPage />
+      ) : (
         <>
-          <SearchResult text={keyword} />
+          <SearchResult text={param.keyword} />
           {loadComponent(isLoading, <LoadingComponent />, <></>)}
           {data && (
             <CardList

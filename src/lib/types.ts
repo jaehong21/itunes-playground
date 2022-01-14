@@ -56,7 +56,8 @@ export enum Explicitness {
 }
 
 export enum Country {
-  Usa = "USA",
+  Usa = "US",
+  Korea = "KO",
 }
 
 export enum Currency {

@@ -1,29 +1,29 @@
 import React from "react";
 import { Box, Fade } from "@mui/material";
-import { Result } from "../lib/types";
+import { Result } from "../../lib/types";
 import CardTrack from "./CardTrack";
 
 import styled from "styled-components";
-import FavoriteCardEmpty from "../pages/section-favorite/FavoriteCardEmpty";
+import FavoriteCardEmpty from "../../pages/section-favorite/FavoriteCardEmpty";
 import { useAtom } from "jotai";
-import { columnsAtom } from "../stores";
-import CardEmpty from "./CardEmpty";
+import { columnsAtom } from "../../store/store";
+import CardEmpty from "../../pages/section-home/CardEmpty";
 
 interface Props {
   tracks: Result[];
-  count: number;
+  count: number | undefined;
   page: string;
 }
 
+const CardTrackColumn = styled.div<{ column: number }>`
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: ${(props) => (props.column % 2 === 0 ? 0 : 50)}px;
+`;
+
 const CardList: React.FC<Props> = ({ tracks, count, page }) => {
   const columns = useAtom(columnsAtom);
-
-  const CardTrackColumn = styled.div<{ column: number }>`
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    margin-top: ${(props) => (props.column % 2 === 0 ? 0 : 50)}px;
-  `;
 
   return (
     <Fade in timeout={1500}>

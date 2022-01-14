@@ -5,13 +5,14 @@ const domain: string = "https://itunes.apple.com";
 
 export const getSearchTrack = (
   keyword: string,
+  country?: string,
   entity?: string,
   limit?: number,
   offset?: number
 ): any => {
   const queryString = qs.stringify({
     term: keyword,
-    country: "US",
+    country,
     entity,
     limit,
     offset,

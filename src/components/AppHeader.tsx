@@ -3,23 +3,20 @@ import { Typography, Box } from "@mui/material";
 import { AppBar, Toolbar } from "@mui/material";
 import { Menu, Favorite } from "@mui/icons-material";
 import { useUpdateAtom } from "jotai/utils";
-import {
-  defaultKeyword,
-  defaultOffset,
-  keywordAtom,
-  offsetAtom,
-} from "../stores";
+import { defaultParam, paramAtom } from "../store/store";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import Input from "./Input";
 import MenuList from "./MenuList";
 import Icon from "./Icon";
+import { useAtom } from "jotai";
+import { requestType } from "../lib/types";
 
 const AppHeader = () => {
   const navigate: NavigateFunction = useNavigate();
   const [input, setInput] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const setKeyword = useUpdateAtom(keywordAtom);
-  const setOffset = useUpdateAtom(offsetAtom);
+  const [param] = useAtom<requestType>(paramAtom);
+  const setParam = useUpdateAtom(paramAtom);
 
   const onClickFavorite = () => {
     if (window.location.pathname === "/") navigate("/favorite");
@@ -27,7 +24,7 @@ const AppHeader = () => {
   };
 
   const onClickMenu = () => {
-    setKeyword(defaultKeyword);
+    setParam((prev) => ({ ...prev, keyword: defaultParam.keyword }));
     navigate("/");
   };
 
@@ -36,8 +33,8 @@ const AppHeader = () => {
   };
   const onKeyPressEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter") {
-      setOffset(defaultOffset);
-      setKeyword(input);
+      setParam((prev) => ({ ...prev, offset: defaultParam.offset }));
+      setParam((prev) => ({ ...prev, keyword: input }));
       setInput("");
       navigate("/");
     }
