@@ -1,9 +1,9 @@
 export interface requestType {
   limit: number;
   keyword: string;
-  entity: Kind;
+  entity: string;
   offset: number;
-  country: Country;
+  country: string;
 }
 
 export interface responseType {
@@ -57,7 +57,7 @@ export enum Explicitness {
 
 export enum Country {
   Usa = "US",
-  Korea = "KO",
+  Korea = "KR",
 }
 
 export enum Currency {
@@ -66,10 +66,11 @@ export enum Currency {
 
 export enum Kind {
   Song = "song",
-  Book = "book",
+  Book = "audiobook",
+  Artist = "allArtist",
   Album = "album",
-  Video = "music-video",
-  Tv = "tv-episode",
+  Video = "musicVideo",
+  Tv = "tvSeason",
 }
 
 export enum WrapperType {

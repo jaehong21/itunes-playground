@@ -8,6 +8,7 @@ import {
   LooksOne,
   LooksTwo,
   MenuBook,
+  People,
   QueueMusic,
   Tv,
   Videocam,
@@ -16,7 +17,7 @@ import {
 } from "@mui/icons-material";
 import { columnsAtom, paramAtom } from "../../store/store";
 import { useAtom } from "jotai";
-import { requestType } from "../../lib/types";
+import { Country, Kind, requestType } from "../../lib/types";
 import { useUpdateAtom } from "jotai/utils";
 interface MenuListProps {
   toggleDrawer: (open: boolean) => void;
@@ -53,14 +54,9 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
         <CollapseList
           icon={<LibraryMusic />}
           text="Song type"
-          subIcon={[
-            <QueueMusic />,
-            <MenuBook />,
-            <Tv />,
-            <Album />,
-            <Videocam />,
-          ]}
-          subText={["song", "book", "TV-Episode", "Album", "Music-Video"]}
+          subIcon={[<QueueMusic />, <Tv />, <Album />, <Videocam />]}
+          subType={[Kind.Song, Kind.Tv, Kind.Album, Kind.Video]}
+          subText={["Song", "TV-Episode", "Album", "Music-Video"]}
           onClick={() => toggleDrawer(false)}
         />
         <CollapseList
@@ -68,6 +64,7 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
           text="Contents per page"
           subIcon={[<div />]}
           subText={[""]}
+          subType={[]}
           children={
             <Slider
               sx={{ mx: 2, color: colors.purple[200] }}
@@ -87,6 +84,7 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
           text="Number of Columns"
           subIcon={[<div />]}
           subText={[""]}
+          subType={[]}
           children={
             <Slider
               sx={{ mx: 2, color: colors.pink[200] }}
@@ -105,6 +103,7 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
           text="Location"
           subIcon={[<LooksOne />, <LooksTwo />]}
           subText={["United States", "Republic of Korea"]}
+          subType={[Country.Usa, Country.Korea]}
           onClick={() => toggleDrawer(false)}
         />
       </List>

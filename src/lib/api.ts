@@ -17,9 +17,15 @@ export const getSearchTrack = (
     limit,
     offset,
   });
-  try {
-    return axios.get(`${domain}/search/?${queryString}`);
-  } catch (e) {
-    alert("Network Error: Please try again");
-  }
+  return axios.get(`${domain}/search/?${queryString}`);
 };
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    alert(`${error} \nPlease try again`);
+    window.location.reload();
+  }
+);

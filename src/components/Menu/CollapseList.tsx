@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Collapse, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Country, Kind, requestType } from "../../lib/types";
+import { useUpdateAtom } from "jotai/utils";
+import { paramAtom } from "../../store/store";
+import { useAtom } from "jotai";
 
 interface CollapseListProps {
   icon: React.ReactNode;
   subIcon: React.ReactNode[];
   text: string;
   subText: string[];
+  subType: Kind[] | Country[];
   children?: React.ReactNode;
   onClick?: () => void;
 }
@@ -22,6 +27,7 @@ interface SubItemProps {
   children?: React.ReactNode;
   subIcon?: React.ReactNode;
   subText?: string;
+  subType: Kind | Country;
 }
 
 const ItemTitle: React.FC<ItemTitleProps> = ({
@@ -41,9 +47,23 @@ const ItemTitle: React.FC<ItemTitleProps> = ({
   );
 };
 
-const SubItem: React.FC<SubItemProps> = ({ children, subIcon, subText }) => {
+const SubItem: React.FC<SubItemProps> = ({
+  children,
+  subIcon,
+  subText,
+  subType,
+}) => {
+  const setParam = useUpdateAtom(paramAtom);
+
   return (
-    <ListItem button>
+    <ListItem
+      button
+      onClick={() => {
+        if (subType === (Country.Korea || Country.Usa))
+          setParam((prev) => ({ ...prev, country: subType }));
+        else setParam((prev) => ({ ...prev, entity: subType }));
+      }}
+    >
       <ListItemIcon sx={{ ml: 3 }}>{subIcon}</ListItemIcon>
       <ListItemText primary={subText} />
     </ListItem>
@@ -55,6 +75,7 @@ const CollapseList: React.FC<CollapseListProps> = ({
   subIcon,
   text,
   subText,
+  subType,
   children,
   onClick,
 }) => {
@@ -68,13 +89,17 @@ const CollapseList: React.FC<CollapseListProps> = ({
         onClick={() => setExpand(!expand)}
         expand={expand}
       />
-
       <Collapse in={expand} timeout="auto" unmountOnExit onClick={onClick}>
         {children ? (
           <ListItem>{children}</ListItem>
         ) : (
           subIcon.map((icon, index) => (
-            <SubItem subIcon={icon} subText={subText[index]} />
+            <SubItem
+              key={index}
+              subIcon={icon}
+              subText={subText[index]}
+              subType={subType[index]}
+            />
           ))
         )}
       </Collapse>

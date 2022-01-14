@@ -8,7 +8,6 @@ import FavoriteCardEmpty from "../../pages/section-favorite/FavoriteCardEmpty";
 import { useAtom } from "jotai";
 import { columnsAtom } from "../../store/store";
 import CardEmpty from "../../pages/section-main/CardEmpty";
-import { useResize } from "../../lib/util";
 
 interface Props {
   tracks: Result[];
@@ -19,8 +18,9 @@ interface Props {
 const CardTrackColumn = styled.div<{ column: number }>`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  min-width: 320px;
   margin-top: ${(props) => (props.column % 2 === 0 ? 0 : 50)}px;
+  margin-right: 10%;
 `;
 
 const CardList: React.FC<Props> = ({ tracks, count, page }) => {

@@ -6,7 +6,7 @@ import { defaultParam, paramAtom } from "../../store/store";
 import { loadComponent, LoadingComponent } from "../../lib/util";
 import { Box } from "@mui/material";
 import CardList from "../../components/Card/CardList";
-import LandingPage from "./LandingPage";
+import WelcomePage from "./WelcomePage";
 import SearchResult from "./SearchResult";
 
 const Main = () => {
@@ -27,7 +27,7 @@ const Main = () => {
   return (
     <Box sx={{ mt: 9.5 }}>
       {param.keyword === defaultParam.keyword ? (
-        <LandingPage />
+        <WelcomePage />
       ) : (
         <>
           <SearchResult text={param.keyword} />

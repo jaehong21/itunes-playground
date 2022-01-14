@@ -2,6 +2,7 @@ import React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
 import Icon from "./Icon";
 
 interface Props extends React.HTMLProps<HTMLInputElement> {
@@ -25,7 +26,7 @@ const SearchWrapper = styled("div")(({ theme }) => ({
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     width: "auto",
   },
 }));

@@ -8,6 +8,18 @@ import SideMenu from "./Menu/SideMenu";
 import Icon from "./Icon";
 import { defaultParam, isFavoriteAtom, paramAtom } from "../store/store";
 import { useAtom } from "jotai";
+import styled from "styled-components";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
+
+const Title = styled(Typography)`
+  font-size: 26px;
+  font-weight: bold;
+  color: black;
+  @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
+    width: 250px;
+    font-size: 20px;
+  }
+`;
 
 const AppHeader = () => {
   const [input, setInput] = useState<string>("");
@@ -49,14 +61,14 @@ const AppHeader = () => {
               onClick={() => setOpen(!open)}
             />
             <Box sx={{ flexGrow: 1 }}>
-              <Typography
+              <Title
                 onClick={onClickMenu}
                 variant="h5"
                 color="black"
                 sx={{ fontWeight: "bold" }}
               >
                 iTunes - Playground
-              </Typography>
+              </Title>
             </Box>
             <Input
               placeholder="Search"

@@ -14,5 +14,5 @@ export const isFavoriteAtom = atom<boolean>(false);
 
 export const favoriteAtom = atom<Result[]>([]);
 
-export const defaultColumns: number[] = [0, 1, 2];
+export const defaultColumns: number[] = [0, 1];
 export const columnsAtom = atom<number[]>(defaultColumns);

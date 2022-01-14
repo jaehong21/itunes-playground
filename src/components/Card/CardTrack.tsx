@@ -46,7 +46,6 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
         sx={{
           display: "flex",
           mb: 4,
-          mx: 4,
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -72,7 +71,9 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
               opacity={0.7}
             />
             <Shortcut
-              text={track.trackViewUrl.substring(0, 29) + "..."}
+              text={
+                track.trackViewUrl && track.trackViewUrl.slice(0, 29) + "..."
+              }
               href={track.trackViewUrl}
               fontSize={14}
               color="gray"
