@@ -1,7 +1,7 @@
 export interface requestType {
+  limit: number;
   keyword: string;
   entity: Kind;
-  limit: number;
   offset: number;
   country: Country;
 }

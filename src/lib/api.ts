@@ -17,7 +17,6 @@ export const getSearchTrack = (
     limit,
     offset,
   });
-  console.log(keyword, entity, limit, offset);
   try {
     return axios.get(`${domain}/search/?${queryString}`);
   } catch (e) {

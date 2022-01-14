@@ -7,7 +7,8 @@ import styled from "styled-components";
 import FavoriteCardEmpty from "../../pages/section-favorite/FavoriteCardEmpty";
 import { useAtom } from "jotai";
 import { columnsAtom } from "../../store/store";
-import CardEmpty from "../../pages/section-home/CardEmpty";
+import CardEmpty from "../../pages/section-main/CardEmpty";
+import { useResize } from "../../lib/util";
 
 interface Props {
   tracks: Result[];
@@ -23,7 +24,7 @@ const CardTrackColumn = styled.div<{ column: number }>`
 `;
 
 const CardList: React.FC<Props> = ({ tracks, count, page }) => {
-  const columns = useAtom(columnsAtom);
+  const [columns] = useAtom<number[]>(columnsAtom);
 
   return (
     <Fade in timeout={1500}>

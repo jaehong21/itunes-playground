@@ -7,10 +7,11 @@ import {
   colors,
   Typography,
 } from "@mui/material";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { isFavoriteAtom } from "../../store/store";
+import { useUpdateAtom } from "jotai/utils";
 
 const FavoriteCardEmpty: React.FC = () => {
-  const navigate: NavigateFunction = useNavigate();
+  const setIsFavorite = useUpdateAtom(isFavoriteAtom);
 
   return (
     <Card sx={{ minWidth: 270, minHeight: 200, mx: 3, my: 5 }}>
@@ -28,7 +29,7 @@ const FavoriteCardEmpty: React.FC = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => navigate("/")}>
+        <Button size="small" onClick={() => setIsFavorite(false)}>
           <Typography color={colors.pink[400]}>Back to Main</Typography>
         </Button>
       </CardActions>

@@ -3,29 +3,26 @@ import { Typography, Box } from "@mui/material";
 import { AppBar, Toolbar } from "@mui/material";
 import { Menu, Favorite } from "@mui/icons-material";
 import { useUpdateAtom } from "jotai/utils";
-import { defaultParam, paramAtom } from "../store/store";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import Input from "./Input";
-import MenuList from "./MenuList";
+import SideMenu from "./Menu/SideMenu";
 import Icon from "./Icon";
+import { defaultParam, isFavoriteAtom, paramAtom } from "../store/store";
 import { useAtom } from "jotai";
-import { requestType } from "../lib/types";
 
 const AppHeader = () => {
-  const navigate: NavigateFunction = useNavigate();
   const [input, setInput] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
-  const [param] = useAtom<requestType>(paramAtom);
   const setParam = useUpdateAtom(paramAtom);
+  const [isFavorite] = useAtom(isFavoriteAtom);
+  const setIsFavorite = useUpdateAtom(isFavoriteAtom);
 
   const onClickFavorite = () => {
-    if (window.location.pathname === "/") navigate("/favorite");
-    else navigate("/");
+    setIsFavorite(!isFavorite);
   };
 
   const onClickMenu = () => {
     setParam((prev) => ({ ...prev, keyword: defaultParam.keyword }));
-    navigate("/");
+    setIsFavorite(false);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +33,7 @@ const AppHeader = () => {
       setParam((prev) => ({ ...prev, offset: defaultParam.offset }));
       setParam((prev) => ({ ...prev, keyword: input }));
       setInput("");
-      navigate("/");
+      setIsFavorite(false);
     }
   };
 
@@ -70,7 +67,7 @@ const AppHeader = () => {
             <Icon
               onClick={onClickFavorite}
               children={<Favorite />}
-              checked={window.location.pathname === "/favorite"}
+              checked={isFavorite}
               subColor="#FD1D1D"
               color="gray"
               opacity={0.7}
@@ -78,7 +75,7 @@ const AppHeader = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <MenuList open={open} setOpen={setOpen} />
+      <SideMenu open={open} setOpen={setOpen} />
     </>
   );
 };

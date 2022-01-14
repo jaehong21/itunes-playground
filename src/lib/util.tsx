@@ -1,6 +1,9 @@
 import React from "react";
 import { HashLoader } from "react-spinners";
 import { Result } from "./types";
+import { useUpdateAtom } from "jotai/utils";
+import { columnsAtom } from "../store/store";
+import { WIDTH_COLUMN_1, WIDTH_COLUMN_2, WIDTH_COLUMN_3 } from "./config";
 
 export function loadComponent(
   loading: boolean,
@@ -44,4 +47,34 @@ export const isDuplicate = (arr: Result[], value: number) => {
 };
 export const arrFilter = (arr: Result[], value: number) => {
   return arr.filter((item: Result) => item.trackId !== value);
+};
+
+//@ts-ignore
+export const debounce = (func, delay) => {
+  let timeoutId: any = null;
+  //@ts-ignore
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+
+export const useResize = (delay: number): void => {
+  const [size, setSize] = React.useState<number>(0);
+  const setColumns = useUpdateAtom(columnsAtom);
+
+  window.addEventListener(
+    "resize",
+    debounce(function () {
+      setSize(window.innerWidth);
+    }, delay)
+  );
+
+  console.log(size);
+
+  if (0 < size && size < WIDTH_COLUMN_1) setColumns([0]);
+  else if (size >= WIDTH_COLUMN_1 && size < WIDTH_COLUMN_2) setColumns([0, 1]);
+  else if (size >= WIDTH_COLUMN_2 && size < WIDTH_COLUMN_3)
+    setColumns([0, 1, 2]);
+  else if (size >= WIDTH_COLUMN_3) setColumns([0, 1, 2, 3]);
 };
