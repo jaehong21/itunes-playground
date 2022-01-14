@@ -21,6 +21,5 @@ export const getSearchTrack = (
     return axios.get(`${domain}/search/?${queryString}`);
   } catch (e) {
     alert("Network Error: Please try again");
-    console.log(e);
   }
 };

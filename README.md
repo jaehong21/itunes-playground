@@ -2,9 +2,11 @@
 
 1. material UI (@mui/material, @emotion/react, @emotion/styled)
 2. material icons (@mui/icons-material)
-3. jotai, react-query)
-4. axios, qs
-5. react-router-dom
+3. styled-components
+4. jotai, react-query)
+5. axios, qs
+6. react-router-dom
+
 
 # Getting Started with Create React App
 

@@ -23,6 +23,8 @@ import {
   Videocam,
   Web,
 } from "@mui/icons-material";
+import { limitAtom } from "../stores";
+import { useAtom } from "jotai";
 
 interface MenuListProps {
   open: boolean;
@@ -30,6 +32,8 @@ interface MenuListProps {
 }
 
 const MenuList: React.FC<MenuListProps> = ({ open, setOpen }) => {
+  const [limit] = useAtom<number>(limitAtom);
+
   const toggleDrawer = (open: boolean) => {
     setOpen(open);
   };
@@ -114,7 +118,7 @@ const MenuList: React.FC<MenuListProps> = ({ open, setOpen }) => {
             <ListItem>
               <Slider
                 sx={{ mx: 1, color: colors.pink[300] }}
-                defaultValue={9}
+                defaultValue={limit}
                 valueLabelDisplay="auto"
                 step={1}
                 min={3}

@@ -1,25 +1,45 @@
-import { Box, CardContent, CardMedia, Paper, Typography } from "@mui/material";
-import { Grow, IconButton, easing } from "@mui/material";
-import { arrFilter, isDuplicate } from "../lib/util";
-import { Favorite } from "@mui/icons-material";
 import React, { useState } from "react";
+import {
+  Box,
+  CardContent,
+  CardMedia,
+  Paper,
+  Typography,
+  Grow,
+  easing,
+} from "@mui/material";
+import { Favorite } from "@mui/icons-material";
+import styled from "styled-components";
 import { Result } from "../lib/types";
-import { useAtom } from "jotai";
 import { favoriteAtom } from "../stores";
+import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
+import { arrFilter, isDuplicate } from "../lib/util";
+import Icon from "./Icon";
+import Shortcut from "./Shortcut";
 
-type CardTrackProps = {
+interface Props {
   track: Result;
   index: number;
-};
+}
 
-const CardTrack: React.FC<CardTrackProps> = ({ track, index }) => {
+const CardTrack: React.FC<Props> = ({ track, index }) => {
   const [favoriteList] = useAtom<Result[]>(favoriteAtom);
   const setFavorite = useUpdateAtom(favoriteAtom);
   const [focus, setFocus] = useState<number>(3);
 
+  const onClickFavorite = () => {
+    if (!isDuplicate(favoriteList, track.trackId)) {
+      setFavorite([...favoriteList, track]);
+      console.log("Add");
+    } else {
+      setFavorite(arrFilter(favoriteList, track.trackId));
+      console.log("Delete");
+    }
+  };
+
   return (
-    <Grow in timeout={400 * index} easing={{ enter: easing.easeOut }}>
+    <Grow in timeout={500 * index} easing={{ enter: easing.easeOut }}>
       <Paper
         onMouseEnter={() => setFocus(14)}
         onMouseLeave={() => setFocus(3)}
@@ -28,7 +48,6 @@ const CardTrack: React.FC<CardTrackProps> = ({ track, index }) => {
           display: "flex",
           mb: 4,
           mx: 4,
-          justifyContent: "space-between",
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -45,45 +64,25 @@ const CardTrack: React.FC<CardTrackProps> = ({ track, index }) => {
             </Typography>
           </CardContent>
           <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-            <IconButton
-              onClick={() => {
-                if (!isDuplicate(favoriteList, track.trackId)) {
-                  setFavorite([...favoriteList, track]);
-                  console.log("Add");
-                } else {
-                  setFavorite(arrFilter(favoriteList, track.trackId));
-                  console.log("Delete");
-                }
-              }}
-            >
-              <Favorite
-                sx={{
-                  color: isDuplicate(favoriteList, track.trackId)
-                    ? "#FD1D1D"
-                    : null,
-                  opacity: 0.7,
-                }}
-              />
-            </IconButton>
-            <IconButton>
-              <a
-                href={track.trackViewUrl}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontSize: "14px",
-                  textDecoration: "none",
-                  color: "gray",
-                }}
-              >
-                {track.trackViewUrl.substring(0, 29)}...
-              </a>
-            </IconButton>
+            <Icon
+              onClick={onClickFavorite}
+              children={<Favorite />}
+              checked={isDuplicate(favoriteList, track.trackId)}
+              color="gray"
+              subColor="#FD1D1D"
+              opacity={0.7}
+            />
+            <Shortcut
+              text={track.trackViewUrl.substring(0, 29) + "..."}
+              href={track.trackViewUrl}
+              fontSize={14}
+              color="gray"
+            />
           </Box>
         </Box>
         <CardMedia
           component="img"
-          sx={{ position: "relative", minWidth: 150 }}
+          sx={{ minWidth: 150 }}
           image={track.artworkUrl100}
           alt="No Image"
         />

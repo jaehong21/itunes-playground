@@ -1,8 +1,13 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { colors } from "@mui/material";
 
 const SaveButton: React.FC = () => {
-  return <Button>Save Button</Button>;
+  return (
+    <Button>
+      <Typography color={colors.pink[200]}>Save</Typography>
+    </Button>
+  );
 };
 
 export default SaveButton;

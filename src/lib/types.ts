@@ -1,3 +1,11 @@
+export interface requestType {
+  keyword: string;
+  entity: Kind;
+  limit: number;
+  offset: number;
+  country: Country;
+}
+
 export interface responseType {
   resultCount?: number;
   results?: Result[];

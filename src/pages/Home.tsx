@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
+import AppHeader from "../components/AppHeader";
 import Main from "./section-home/Main";
 
 const Home: React.FC = () => {
   return (
     <>
-      <Header />
+      <AppHeader />
       <Main />
     </>
   );

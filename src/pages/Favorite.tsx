@@ -1,20 +1,21 @@
 import React from "react";
-import Header from "../components/Header";
-import CardList from "./section-favorite/CardList";
+import AppHeader from "../components/AppHeader";
+import CardList from "../components/CardList";
 import { useAtom } from "jotai";
 import { favoriteAtom } from "../stores";
-import { Box } from "@mui/material";
 import SaveButton from "../components/SaveButton";
 
 const Favorite: React.FC = () => {
   const [favoriteList] = useAtom(favoriteAtom);
   return (
     <>
-      <Header />
+      <AppHeader />
       <SaveButton />
-      <Box>
-        <CardList tracks={favoriteList} count={favoriteList.length} />
-      </Box>
+      <CardList
+        tracks={favoriteList}
+        count={favoriteList.length}
+        page="favorite"
+      />
     </>
   );
 };

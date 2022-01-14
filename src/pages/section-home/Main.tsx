@@ -10,9 +10,10 @@ import {
   offsetAtom,
 } from "../../stores";
 import { loadComponent, LoadingComponent } from "../../lib/util";
-import { Box, Typography, Collapse } from "@mui/material";
-import CardList from "./CardList";
+import { Box } from "@mui/material";
+import CardList from "../../components/CardList";
 import LandingPage from "./LandingPage";
+import SearchResult from "./SearchResult";
 
 const Main = () => {
   const [keyword] = useAtom(keywordAtom);
@@ -20,7 +21,7 @@ const Main = () => {
   const [entity] = useAtom(entityAtom);
   const [offset] = useAtom(offsetAtom);
 
-  const { isLoading, error, data } = useQuery<any | Error>(
+  const { isLoading, data } = useQuery<any | Error>(
     [keyword, entity, limit, offset],
     () => getSearchTrack(keyword, entity, limit, offset)
   );
@@ -30,26 +31,13 @@ const Main = () => {
       <LandingPage />
       {!(keyword === defaultKeyword) && (
         <>
-          <Typography
-            component="div"
-            fontSize="20px"
-            sx={{ mx: 9, alignItems: "center" }}
-          >
-            Search result for :{" "}
-            <Typography
-              component="div"
-              fontSize="22px"
-              fontWeight="bold"
-              sx={{ display: "inline-block" }}
-            >
-              {keyword}
-            </Typography>
-          </Typography>
+          <SearchResult text={keyword} />
           {loadComponent(isLoading, <LoadingComponent />, <></>)}
           {data && (
             <CardList
               tracks={data.data.results}
               count={data.data.resultCount}
+              page="home"
             />
           )}
         </>
