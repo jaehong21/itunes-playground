@@ -1,44 +1,40 @@
 import React, { useState } from "react";
 import { Collapse, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Country, Kind, requestType } from "../../lib/types";
-import { useUpdateAtom } from "jotai/utils";
-import { paramAtom } from "../../store/store";
-import { useAtom } from "jotai";
-
-interface CollapseListProps {
-  icon: React.ReactNode;
-  subIcon: React.ReactNode[];
-  text: string;
-  subText: string[];
-  subType: Kind[] | Country[];
-  children?: React.ReactNode;
-  onClick?: () => void;
-}
 
 interface ItemTitleProps {
   icon: React.ReactNode;
   text: string;
   expand: boolean;
-  onClick?: () => void;
+  toggleCollapse: () => void;
 }
 
 interface SubItemProps {
   children?: React.ReactNode;
   subIcon?: React.ReactNode;
   subText?: string;
-  subType: Kind | Country;
+  onClick?: () => void;
+}
+
+interface CollapseListProps {
+  icon: React.ReactNode;
+  subIcon: React.ReactNode[];
+  text: string;
+  subText: string[];
+  children?: React.ReactNode;
+  toggleDrawer?: () => void;
+  onClick: { (): void }[];
 }
 
 const ItemTitle: React.FC<ItemTitleProps> = ({
   icon,
   text,
   expand,
-  onClick,
+  toggleCollapse,
 }) => {
   return (
     <>
-      <ListItem button onClick={onClick}>
+      <ListItem button onClick={toggleCollapse}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />
         {expand ? <ExpandLess /> : <ExpandMore />}
@@ -51,19 +47,10 @@ const SubItem: React.FC<SubItemProps> = ({
   children,
   subIcon,
   subText,
-  subType,
+  onClick,
 }) => {
-  const setParam = useUpdateAtom(paramAtom);
-
   return (
-    <ListItem
-      button
-      onClick={() => {
-        if (subType === (Country.Korea || Country.Usa))
-          setParam((prev) => ({ ...prev, country: subType }));
-        else setParam((prev) => ({ ...prev, entity: subType }));
-      }}
-    >
+    <ListItem button onClick={onClick}>
       <ListItemIcon sx={{ ml: 3 }}>{subIcon}</ListItemIcon>
       <ListItemText primary={subText} />
     </ListItem>
@@ -75,8 +62,8 @@ const CollapseList: React.FC<CollapseListProps> = ({
   subIcon,
   text,
   subText,
-  subType,
   children,
+  toggleDrawer,
   onClick,
 }) => {
   const [expand, setExpand] = useState(false);
@@ -86,10 +73,10 @@ const CollapseList: React.FC<CollapseListProps> = ({
       <ItemTitle
         icon={icon}
         text={text}
-        onClick={() => setExpand(!expand)}
+        toggleCollapse={() => setExpand(!expand)}
         expand={expand}
       />
-      <Collapse in={expand} timeout="auto" unmountOnExit onClick={onClick}>
+      <Collapse in={expand} timeout="auto" unmountOnExit onClick={toggleDrawer}>
         {children ? (
           <ListItem>{children}</ListItem>
         ) : (
@@ -98,7 +85,7 @@ const CollapseList: React.FC<CollapseListProps> = ({
               key={index}
               subIcon={icon}
               subText={subText[index]}
-              subType={subType[index]}
+              onClick={onClick[index]}
             />
           ))
         )}

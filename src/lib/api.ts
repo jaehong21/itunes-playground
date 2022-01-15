@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import { defaultParam } from "../store/store";
 
 const domain: string = "https://itunes.apple.com";
 
@@ -7,7 +8,7 @@ export const getSearchTrack = (
   keyword: string,
   country?: string,
   entity?: string,
-  limit?: number,
+  limit?: number | number[],
   offset?: number
 ): any => {
   const queryString = qs.stringify({
@@ -17,7 +18,8 @@ export const getSearchTrack = (
     limit,
     offset,
   });
-  return axios.get(`${domain}/search/?${queryString}`);
+  if (!(defaultParam.keyword === keyword))
+    return axios.get(`${domain}/search/?${queryString}`);
 };
 
 axios.interceptors.response.use(

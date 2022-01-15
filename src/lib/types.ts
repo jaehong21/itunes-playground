@@ -1,5 +1,5 @@
 export interface requestType {
-  limit: number;
+  limit: number | number[];
   keyword: string;
   entity: string;
   offset: number;

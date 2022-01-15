@@ -7,8 +7,6 @@ import {
   LibraryMusic,
   LooksOne,
   LooksTwo,
-  MenuBook,
-  People,
   QueueMusic,
   Tv,
   Videocam,
@@ -17,63 +15,74 @@ import {
 } from "@mui/icons-material";
 import { columnsAtom, paramAtom } from "../../store/store";
 import { useAtom } from "jotai";
-import { Country, Kind, requestType } from "../../lib/types";
+import { Kind, requestType } from "../../lib/types";
 import { useUpdateAtom } from "jotai/utils";
+import { generateColumn } from "../../lib/util";
+import { useTranslation } from "react-i18next";
+import Sliders from "../Sliders";
+
 interface MenuListProps {
   toggleDrawer: (open: boolean) => void;
 }
 
 const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
+  const [t, i18n] = useTranslation("lang", { useSuspense: false });
   const [param] = useAtom<requestType>(paramAtom);
   const setParam = useUpdateAtom(paramAtom);
   const [columns] = useAtom<number[]>(columnsAtom);
   const setColumns = useUpdateAtom(columnsAtom);
 
-  const [content, setContent] = useState<any>(param.limit);
+  const [contentNum, setContentNum] = useState<number | number[]>(param.limit);
 
+  const setEntity = (entity: string) => {
+    setParam((prev) => ({ ...prev, entity: entity }));
+  };
+  const setLimit = (limit: number | number[]) => {
+    setParam((prev) => ({ ...prev, limit: limit }));
+  };
   const handleContentNumber = (event: Event, value: number | number[]) => {
-    setContent(value);
-    setTimeout(() => setParam((prev) => ({ ...prev, limit: content })), 700);
+    setContentNum(value);
+    setTimeout(() => setLimit(contentNum), 700);
   };
   const handleColumnNumber = (event: Event, value: number | number[]) => {
-    setTimeout(() =>
-      setColumns(function (): number[] {
-        let arr: number[] = [];
-        for (let i = 0; i < value; i++) {
-          arr.push(i);
-        }
-        return arr;
-      })
-    );
+    setColumns(generateColumn(value));
   };
 
   return (
     <Box sx={{ width: 270, backgroundColor: "white" }} role="presentation">
       <List>
-        <ListSubheader>Settings</ListSubheader>
+        <ListSubheader>{t("menu.header")}</ListSubheader>
         <CollapseList
           icon={<LibraryMusic />}
-          text="Song type"
+          text={t("menu.list.0.title")}
           subIcon={[<QueueMusic />, <Tv />, <Album />, <Videocam />]}
-          subType={[Kind.Song, Kind.Tv, Kind.Album, Kind.Video]}
-          subText={["Song", "TV-Episode", "Album", "Music-Video"]}
-          onClick={() => toggleDrawer(false)}
+          onClick={[
+            () => setEntity(Kind.Song),
+            () => setEntity(Kind.Tv),
+            () => setEntity(Kind.Album),
+            () => setEntity(Kind.Video),
+          ]}
+          subText={[
+            t("menu.list.0.item.0"),
+            t("menu.list.0.item.1"),
+            t("menu.list.0.item.2"),
+            t("menu.list.0.item.3"),
+          ]}
+          toggleDrawer={() => toggleDrawer(false)}
         />
         <CollapseList
           icon={<Web />}
-          text="Contents per page"
+          text={t("menu.list.1.title")}
           subIcon={[<div />]}
-          subText={[""]}
-          subType={[]}
+          subText={[]}
+          onClick={[]}
           children={
-            <Slider
-              sx={{ mx: 2, color: colors.purple[200] }}
-              defaultValue={param.limit}
-              valueLabelDisplay="auto"
-              value={content}
-              onChange={(event, value) => handleContentNumber(event, value)}
+            <Sliders
+              defaultValue={contentNum}
+              color={colors.purple[200]}
+              value={contentNum}
+              onChange={handleContentNumber}
               step={7}
-              marks
               min={1}
               max={40}
             />
@@ -81,18 +90,17 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
         />
         <CollapseList
           icon={<ViewColumn />}
-          text="Number of Columns"
+          text={t("menu.list.2.title")}
           subIcon={[<div />]}
-          subText={[""]}
-          subType={[]}
+          subText={[]}
+          onClick={[]}
           children={
-            <Slider
-              sx={{ mx: 2, color: colors.pink[200] }}
+            <Sliders
               defaultValue={columns.length}
-              valueLabelDisplay="auto"
+              color={colors.pink[200]}
               step={1}
-              onChange={(event, value) => handleColumnNumber(event, value)}
-              marks
+              value={columns.length}
+              onChange={handleColumnNumber}
               min={1}
               max={4}
             />
@@ -100,11 +108,14 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
         />
         <CollapseList
           icon={<Language />}
-          text="Location"
+          text={t("menu.list.3.title")}
           subIcon={[<LooksOne />, <LooksTwo />]}
-          subText={["United States", "Republic of Korea"]}
-          subType={[Country.Usa, Country.Korea]}
-          onClick={() => toggleDrawer(false)}
+          subText={[t("menu.list.3.item.0"), t("menu.list.3.item.1")]}
+          onClick={[
+            () => i18n.changeLanguage("en"),
+            () => i18n.changeLanguage("ko"),
+          ]}
+          toggleDrawer={() => toggleDrawer(false)}
         />
       </List>
     </Box>

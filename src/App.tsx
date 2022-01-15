@@ -3,8 +3,6 @@ import { Provider } from "jotai";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Favorite from "./pages/section-favorite/Favorite";
-import { useResize } from "./lib/util";
 
 function App() {
   const queryClient = new QueryClient();
@@ -14,7 +12,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Routes>
           <Route element={<Home />} path="/" />
-          <Route element={<Favorite />} path="/favorite" />
+          <Route element={<Home />} path="*" />
         </Routes>
       </QueryClientProvider>
     </Provider>

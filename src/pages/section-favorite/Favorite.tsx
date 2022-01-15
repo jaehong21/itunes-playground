@@ -2,13 +2,15 @@ import React from "react";
 import CardList from "../../components/Card/CardList";
 import { useAtom } from "jotai";
 import { favoriteAtom } from "../../store/store";
-import SaveButton from "../../components/SaveButton";
+import Buttons from "./Buttons";
+import VolumeDisplay from "../../components/VolumeDisplay";
 
 const Favorite: React.FC = () => {
   const [favoriteList] = useAtom(favoriteAtom);
   return (
     <>
-      <SaveButton />
+      <Buttons />
+      <VolumeDisplay />
       <CardList
         tracks={favoriteList}
         count={favoriteList.length}

@@ -20,7 +20,7 @@ const Root = styled.a<{ fontSize?: number; color?: string }>`
 const Shortcut: React.FC<Props> = ({ href, text, fontSize, color }) => {
   return (
     <IconButton>
-      <Root href={href} fontSize={fontSize} color={color}>
+      <Root href={href} fontSize={fontSize} color={color} target="_blank">
         {text}
       </Root>
     </IconButton>

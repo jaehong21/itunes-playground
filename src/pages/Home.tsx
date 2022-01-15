@@ -7,7 +7,6 @@ import { isFavoriteAtom } from "../store/store";
 
 const Home: React.FC = () => {
   const [isFavorite] = useAtom<boolean>(isFavoriteAtom);
-
   return (
     <>
       <AppHeader />
@@ -16,4 +15,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default   Home;
+export default Home;

@@ -8,6 +8,7 @@ import { Box } from "@mui/material";
 import CardList from "../../components/Card/CardList";
 import WelcomePage from "./WelcomePage";
 import SearchResult from "./SearchResult";
+import VolumeDisplay from "../../components/VolumeDisplay";
 
 const Main = () => {
   const [param] = useAtom(paramAtom);
@@ -31,6 +32,7 @@ const Main = () => {
       ) : (
         <>
           <SearchResult text={param.keyword} />
+          <VolumeDisplay />
           {loadComponent(isLoading, <LoadingComponent />, <></>)}
           {data && (
             <CardList

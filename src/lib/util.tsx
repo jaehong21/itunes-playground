@@ -1,9 +1,6 @@
 import React from "react";
 import { HashLoader } from "react-spinners";
 import { Result } from "./types";
-import { useUpdateAtom } from "jotai/utils";
-import { columnsAtom } from "../store/store";
-import { WIDTH_COLUMN_1, WIDTH_COLUMN_2, WIDTH_COLUMN_3 } from "./config";
 
 export function loadComponent(
   loading: boolean,
@@ -59,7 +56,22 @@ export const debounce = (func, delay) => {
   };
 };
 
-export const useResize = (delay: number): void => {
+export const generateColumn = (value: number | number[]) => {
+  switch (value) {
+    case 1:
+      return [0];
+    case 2:
+      return [0, 1];
+    case 3:
+      return [0, 1, 2];
+    case 4:
+      return [0, 1, 3, 4];
+    default:
+      return [0, 1];
+  }
+};
+
+/*export const useResize = (delay: number): void => {
   const [size, setSize] = React.useState<number>(0);
   const setColumns = useUpdateAtom(columnsAtom);
 
@@ -77,4 +89,4 @@ export const useResize = (delay: number): void => {
   else if (size >= WIDTH_COLUMN_2 && size < WIDTH_COLUMN_3)
     setColumns([0, 1, 2]);
   else if (size >= WIDTH_COLUMN_3) setColumns([0, 1, 2, 3]);
-};
+};*/

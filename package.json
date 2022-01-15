@@ -1,4 +1,5 @@
 {
+  "homepage": ".",
   "name": "itunes-playground",
   "version": "0.1.0",
   "private": true,
@@ -15,11 +16,17 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.24.0",
+    "gh-pages": "^3.2.3",
+    "i18next": "^21.6.6",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "i18next-xhr-backend": "^3.2.2",
     "jotai": "^1.5.1",
     "prettier": "^2.5.1",
     "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.15.3",
+    "react-player": "^2.9.0",
     "react-query": "^3.34.7",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -32,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

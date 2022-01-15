@@ -1,0 +1,47 @@
+{
+  "welcome": {
+    "title": "Enjoy your Favorite Music",
+    "description": [
+      "You can easily and quickly search all the songs provided by Apple Music on this site",
+      "Also you can come back to listen to the songs you have you want"
+    ],
+    "card": [{
+      "title": "Various Genres",
+      "description": "Link to iTunes where more than 1000 musics exist"
+    }, {
+      "title": "Fast Speed",
+      "description": "Apple Music API provides fast and accurate search engine"
+    }, {
+        "title": "Save Favorite Musics",
+        "description": "You can save your favorite music and comeback anytime"
+    }]
+  },
+  "menu":  {
+    "header": "Settings",
+    "list": [
+      {
+        "title": "Song type",
+        "item": ["Song", "TV-Episode", "Album", "Music-Video"]
+      }, {
+        "title": "Contents per page"
+      }, {
+        "title": "Number of Columns"
+      }, {
+        "title": "Language",
+        "item": ["English", "Korean"]
+      }
+    ]
+  },
+  "favorite": {
+    "btn": {
+      "save": "SAVE",
+      "load": "LOAD"
+    },
+    "notice": {
+      "title": "Sad ...",
+      "advice": "Advice :",
+      "description": ["you need to add at least one music", "to view some contents on this page"],
+      "btn": "BACK TO MAIN"
+    }
+  }
+}

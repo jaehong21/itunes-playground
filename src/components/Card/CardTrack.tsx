@@ -10,12 +10,14 @@ import {
 } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
 import { Result } from "../../lib/types";
-import { favoriteAtom } from "../../store/store";
+import { favoriteAtom, volumeAtom } from "../../store/store";
 import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
 import { arrFilter, isDuplicate } from "../../lib/util";
 import Icon from "../Icon";
 import Shortcut from "../Shortcut";
+
+import ReactPlayer from "react-player";
 
 interface Props {
   track: Result;
@@ -24,8 +26,9 @@ interface Props {
 
 const CardTrack: React.FC<Props> = ({ track, index }) => {
   const [favoriteList] = useAtom<Result[]>(favoriteAtom);
+  const [volume] = useAtom<number | number[]>(volumeAtom);
   const setFavorite = useUpdateAtom(favoriteAtom);
-  const [focus, setFocus] = useState<number>(3);
+  const [focus, setFocus] = useState<boolean>(false);
 
   const onClickFavorite = () => {
     if (!isDuplicate(favoriteList, track.trackId)) {
@@ -40,14 +43,24 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
   return (
     <Grow in timeout={500 * index} easing={{ enter: easing.easeOut }}>
       <Paper
-        onMouseEnter={() => setFocus(14)}
-        onMouseLeave={() => setFocus(3)}
-        elevation={focus}
+        onMouseEnter={() => setFocus(true)}
+        onMouseLeave={() => setFocus(false)}
+        elevation={focus ? 10 : 1}
         sx={{
           display: "flex",
+          minWidth: "420px",
           mb: 4,
         }}
       >
+        <ReactPlayer
+          style={{ display: "none" }}
+          url={track.previewUrl}
+          // @ts-ignore
+          volume={volume / 100}
+          loop={true}
+          playing={focus}
+          onProgress={(e) => console.log(e)}
+        />
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5">
