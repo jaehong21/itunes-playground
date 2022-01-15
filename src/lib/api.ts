@@ -2,7 +2,7 @@ import axios from "axios";
 import qs from "qs";
 import { defaultParam } from "../store/store";
 
-const domain: string = "https://itunes.apple.com";
+const domain: string = "";
 
 export const getSearchTrack = (
   keyword: string,
