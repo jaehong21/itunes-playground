@@ -38,10 +38,14 @@
       "load": "LOAD"
     },
     "notice": {
-      "title": "Sad ...",
+      "title": "No Items Found",
       "advice": "Advice :",
       "description": ["you need to add at least one music", "to view some contents on this page"],
       "btn": "BACK TO MAIN"
+    },
+    "alert": {
+      "save": "Do you wanna save your favorite Items?",
+      "load": "Do you wanna load your favorite Items?"
     }
   }
 }
