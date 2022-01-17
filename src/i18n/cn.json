@@ -32,6 +32,9 @@
       }
     ]
   },
+  "main": {
+    "search": "搜索結果 : "
+  },
   "favorite": {
     "btn": {
       "save": "保存",

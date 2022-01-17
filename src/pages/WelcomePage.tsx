@@ -24,10 +24,17 @@ const WelcomeCardWrapper = styled.div`
   }
 `;
 
+const WelcomeTitle = styled(Typography)`
+  margin-bottom: 40px;
+  @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
+    font-size: 24px;
+  }
+`;
+
 const WelcomeDescription = styled(Typography)`
   line-height: 24px;
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
-    font-size: 14px;
+    font-size: 13px;
   }
 `;
 
@@ -70,9 +77,9 @@ const WelcomePage: React.FC = () => {
         justifyContent: "center",
       }}
     >
-      <Typography variant="h4" fontWeight="bold" sx={{ my: 4 }}>
+      <WelcomeTitle variant="h4" fontWeight="bold" sx={{ my: 4 }}>
         {t("welcome.title")}
-      </Typography>
+      </WelcomeTitle>
       <WelcomeDescription>{t("welcome.description.0")}</WelcomeDescription>
       <WelcomeDescription>{t("welcome.description.1")}</WelcomeDescription>
       <WelcomeCardWrapper>

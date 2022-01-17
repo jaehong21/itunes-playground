@@ -3,7 +3,7 @@ import Sliders from "./Sliders";
 import { useAtom } from "jotai";
 import { defaultVolume, volumeAtom } from "../store/store";
 import { useUpdateAtom } from "jotai/utils";
-import { Box, colors, Typography } from "@mui/material";
+import { colors, Typography } from "@mui/material";
 import Icon from "./Icon";
 import {
   VolumeDown,
@@ -11,6 +11,22 @@ import {
   VolumeOff,
   VolumeUp,
 } from "@mui/icons-material";
+import styled from "styled-components";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
+
+const Root = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 300px;
+  top: 77px;
+  left: 350px;
+  @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
+    width: 250px;
+    left: 230px;
+  }
+`;
 
 const VolumeDisplay: React.FC = () => {
   const [volume] = useAtom<number | number[]>(volumeAtom);
@@ -35,17 +51,7 @@ const VolumeDisplay: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "row",
-        width: "300px",
-        top: "77px",
-        left: "350px",
-      }}
-    >
+    <Root>
       <Icon
         children={<VolumeIcon />}
         onClick={() => setVolume(volume ? 0 : defaultVolume)}
@@ -62,7 +68,7 @@ const VolumeDisplay: React.FC = () => {
         valueLabelDisplay="off"
       />
       <Typography fontWeight="bold">{volume}</Typography>
-    </Box>
+    </Root>
   );
 };
 export default VolumeDisplay;

@@ -32,6 +32,9 @@
       }
     ]
   },
+  "main": {
+    "search": "Search for : "
+  },
   "favorite": {
     "btn": {
       "save": "SAVE",

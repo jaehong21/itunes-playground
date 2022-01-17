@@ -32,6 +32,9 @@
       }
     ]
   },
+  "main": {
+    "search": "검색 결과 : "
+  },
   "favorite": {
     "btn": {
       "save": "저장",
