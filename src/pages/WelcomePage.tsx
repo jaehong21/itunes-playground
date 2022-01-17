@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, CardActionArea } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
-import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH, transition } from "../lib/config";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -26,15 +26,19 @@ const WelcomeCardWrapper = styled.div`
 
 const WelcomeTitle = styled(Typography)`
   margin-bottom: 40px;
+  transition: ${transition};
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
+    margin-bottom: 22px;
     font-size: 24px;
   }
 `;
 
 const WelcomeDescription = styled(Typography)`
   line-height: 24px;
+  font-size: 16.5px;
+  transition: ${transition};
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
 

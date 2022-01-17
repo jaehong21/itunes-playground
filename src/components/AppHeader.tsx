@@ -9,12 +9,13 @@ import Icon from "./Icon";
 import { defaultParam, isFavoriteAtom, paramAtom } from "../store/store";
 import { useAtom } from "jotai";
 import styled from "styled-components";
-import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH, transition } from "../lib/config";
 
 const Title = styled(Typography)`
   font-size: 26px;
   font-weight: bold;
   color: black;
+  transition: ${transition};
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
     width: 250px;
     font-size: 20px;

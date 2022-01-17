@@ -12,7 +12,7 @@ import {
   VolumeUp,
 } from "@mui/icons-material";
 import styled from "styled-components";
-import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH, transition } from "../lib/config";
 
 const Root = styled.div`
   display: flex;
@@ -21,6 +21,7 @@ const Root = styled.div`
   width: 300px;
   margin-top: 3px;
   margin-left: 50px;
+  transition: ${transition};
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
     margin-left: 20px;
     width: 240px;

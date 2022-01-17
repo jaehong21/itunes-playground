@@ -53,6 +53,7 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
         sx={{
           display: "flex",
           minWidth: "420px",
+          maxWidth: "500px",
           mb: 4,
         }}
       >

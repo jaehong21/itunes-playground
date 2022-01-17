@@ -83,7 +83,8 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
               color={colors.purple[200]}
               value={contentNum}
               onChange={handleContentNumber}
-              step={7}
+              marks={true}
+              step={3}
               min={1}
               max={40}
             />
