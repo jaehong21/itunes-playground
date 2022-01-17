@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, CardActionArea } from "@mui/material";
 import { Card, CardContent, CardMedia } from "@mui/material";
-import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../../lib/config";
+import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 

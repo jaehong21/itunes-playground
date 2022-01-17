@@ -71,6 +71,13 @@ export const generateColumn = (value: number | number[]) => {
   }
 };
 
+export const onSave = (key: string, value: any) => {
+  localStorage.setItem("iTunes", JSON.stringify(value));
+};
+export const onLoad = (key: string, func: any) => {
+  func(JSON.parse(localStorage.getItem(key) as string));
+};
+
 /*export const useResize = (delay: number): void => {
   const [size, setSize] = React.useState<number>(0);
   const setColumns = useUpdateAtom(columnsAtom);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, colors, List, ListSubheader, Slider } from "@mui/material";
+import { Box, colors, List, ListSubheader } from "@mui/material";
 import CollapseList from "./CollapseList";
 import {
   Album,
@@ -7,6 +7,7 @@ import {
   LibraryMusic,
   LooksOne,
   LooksTwo,
+  Looks3,
   QueueMusic,
   Tv,
   Videocam,
@@ -109,11 +110,16 @@ const MenuList: React.FC<MenuListProps> = ({ toggleDrawer }) => {
         <CollapseList
           icon={<Language />}
           text={t("menu.list.3.title")}
-          subIcon={[<LooksOne />, <LooksTwo />]}
-          subText={[t("menu.list.3.item.0"), t("menu.list.3.item.1")]}
+          subIcon={[<LooksOne />, <LooksTwo />, <Looks3 />]}
+          subText={[
+            t("menu.list.3.item.0"),
+            t("menu.list.3.item.1"),
+            t("menu.list.3.item.2"),
+          ]}
           onClick={[
             () => i18n.changeLanguage("en"),
             () => i18n.changeLanguage("ko"),
+            () => i18n.changeLanguage("cn"),
           ]}
           toggleDrawer={() => toggleDrawer(false)}
         />

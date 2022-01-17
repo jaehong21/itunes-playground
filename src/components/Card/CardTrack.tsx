@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   CardContent,
@@ -13,7 +13,7 @@ import { Result } from "../../lib/types";
 import { favoriteAtom, volumeAtom } from "../../store/store";
 import { useAtom } from "jotai";
 import { useUpdateAtom } from "jotai/utils";
-import { arrFilter, isDuplicate } from "../../lib/util";
+import { arrFilter, isDuplicate, onSave } from "../../lib/util";
 import Icon from "../Icon";
 import Shortcut from "../Shortcut";
 
@@ -40,6 +40,10 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
     }
   };
 
+  useEffect(() => {
+    onSave("iTunes", favoriteList);
+  }, [favoriteList]);
+
   return (
     <Grow in timeout={500 * index} easing={{ enter: easing.easeOut }}>
       <Paper
@@ -59,7 +63,6 @@ const CardTrack: React.FC<Props> = ({ track, index }) => {
           volume={volume / 100}
           loop={true}
           playing={focus}
-          onProgress={(e) => console.log(e)}
         />
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>

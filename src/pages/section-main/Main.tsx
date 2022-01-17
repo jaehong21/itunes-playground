@@ -6,12 +6,12 @@ import { defaultParam, paramAtom } from "../../store/store";
 import { loadComponent, LoadingComponent } from "../../lib/util";
 import { Box } from "@mui/material";
 import CardList from "../../components/Card/CardList";
-import WelcomePage from "./WelcomePage";
 import SearchResult from "./SearchResult";
 import VolumeDisplay from "../../components/VolumeDisplay";
+import { requestType } from "../../lib/types";
 
 const Main = () => {
-  const [param] = useAtom(paramAtom);
+  const [param] = useAtom<requestType>(paramAtom);
 
   const { isLoading, data } = useQuery<any | Error>(
     [param.keyword, param.country, param.entity, param.limit, param.offset],
@@ -26,10 +26,8 @@ const Main = () => {
   );
 
   return (
-    <Box sx={{ mt: 9.5 }}>
-      {param.keyword === defaultParam.keyword ? (
-        <WelcomePage />
-      ) : (
+    <Box>
+      {param.keyword !== defaultParam.keyword && (
         <>
           <SearchResult text={param.keyword} />
           <VolumeDisplay />

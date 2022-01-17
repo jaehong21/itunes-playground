@@ -5,10 +5,11 @@ import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 
 import ko from "./kr.json";
 import en from "./en.json";
+import cn from "./cn.json";
 
 i18n
   .use(I18NextXhrBackend)
-  // .use(I18nextBrowserLanguageDetector)
+  .use(I18nextBrowserLanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: "en",
@@ -19,6 +20,9 @@ i18n
       },
       en: {
         lang: en,
+      },
+      cn: {
+        lang: cn,
       },
     },
     ns: ["lang"],
