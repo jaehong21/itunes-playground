@@ -20,10 +20,10 @@ const Root = styled.div`
   flex-direction: row;
   width: 300px;
   margin-top: 3px;
-  margin-left: 50px;
+  margin-left: 22px;
   transition: ${transition};
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
-    margin-left: 20px;
+    margin-left: 10px;
     width: 240px;
   }
 `;

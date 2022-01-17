@@ -6,6 +6,7 @@ import SaveLoad from "./SaveLoad";
 import VolumeDisplay from "../../components/VolumeDisplay";
 import { onLoad } from "../../lib/util";
 import { useUpdateAtom } from "jotai/utils";
+import Header from "../Header";
 
 const Favorite: React.FC = () => {
   const [favoriteList] = useAtom(favoriteAtom);
@@ -17,8 +18,7 @@ const Favorite: React.FC = () => {
 
   return (
     <>
-      <SaveLoad />
-      <VolumeDisplay />
+      <Header />
       <CardList
         tracks={favoriteList}
         count={favoriteList.length}
