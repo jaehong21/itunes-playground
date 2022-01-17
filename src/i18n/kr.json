@@ -33,7 +33,10 @@
     ]
   },
   "main": {
-    "search": "검색 결과 : "
+    "header": {
+      "search": "검색 결과 : ",
+      "alert": "이미 첫번째 페이지입니다"
+    }
   },
   "favorite": {
     "btn": {

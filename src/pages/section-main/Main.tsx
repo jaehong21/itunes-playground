@@ -9,6 +9,7 @@ import CardList from "../../components/Card/CardList";
 import SearchResult from "./SearchResult";
 import VolumeDisplay from "../../components/VolumeDisplay";
 import { requestType } from "../../lib/types";
+import Header from "../Header";
 
 const Main = () => {
   const [param] = useAtom<requestType>(paramAtom);
@@ -29,8 +30,7 @@ const Main = () => {
     <Box>
       {param.keyword !== defaultParam.keyword && (
         <>
-          <SearchResult text={param.keyword} />
-          <VolumeDisplay />
+          <Header />
           {loadComponent(isLoading, <LoadingComponent />, <></>)}
           {data && (
             <CardList

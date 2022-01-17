@@ -1,30 +1,30 @@
 import React from "react";
-import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-interface Props {
+const SearchTitle = styled.div`
+  align-items: center;
+  font-size: 20px;
+`;
+const SearchDescription = styled.div`
+  display: inline-block;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+interface SearchResultProps {
   text: string;
 }
 
-const SearchResult: React.FC<Props> = ({ text }) => {
+const SearchResult: React.FC<SearchResultProps> = ({ text }) => {
   const [t, i18n] = useTranslation("lang", { useSuspense: false });
 
   return (
-    <Typography
-      component="div"
-      fontSize="20px"
-      sx={{ mx: 7, alignItems: "center" }}
-    >
-      {t("main.search")}
-      <Typography
-        component="div"
-        fontSize="22px"
-        fontWeight="bold"
-        sx={{ display: "inline-block" }}
-      >
-        {text}
-      </Typography>
-    </Typography>
+    <SearchTitle>
+      {t("main.header.search")}
+      <SearchDescription>{text}</SearchDescription>
+    </SearchTitle>
   );
 };
 

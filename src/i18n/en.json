@@ -33,7 +33,10 @@
     ]
   },
   "main": {
-    "search": "Search for : "
+    "header": {
+      "search": "Search for : ",
+      "alert": "End of the page"
+    }
   },
   "favorite": {
     "btn": {

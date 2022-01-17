@@ -15,16 +15,15 @@ import styled from "styled-components";
 import { MEDIA_QUERY_WIDTH_MOBILE_WIDTH } from "../lib/config";
 
 const Root = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   flex-direction: row;
   width: 300px;
-  top: 77px;
-  left: 350px;
+  margin-top: 3px;
+  margin-left: 50px;
   @media (${MEDIA_QUERY_WIDTH_MOBILE_WIDTH}) {
-    width: 250px;
-    left: 230px;
+    margin-left: 20px;
+    width: 240px;
   }
 `;
 

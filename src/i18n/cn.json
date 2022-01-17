@@ -33,7 +33,10 @@
     ]
   },
   "main": {
-    "search": "搜索結果 : "
+    "header": {
+      "search": "搜索結果 : ",
+      "alert": "已經是第一頁了"
+    }
   },
   "favorite": {
     "btn": {
