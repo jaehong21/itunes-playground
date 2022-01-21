@@ -3,6 +3,7 @@ import { Provider } from "jotai";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Practice from "./pages/Practice";
 
 function App() {
   const queryClient = new QueryClient();
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route element={<Home />} path="/" />
           <Route element={<Home />} path="*" />
+          <Route element={<Practice />} path="/practice" />
         </Routes>
       </QueryClientProvider>
     </Provider>
