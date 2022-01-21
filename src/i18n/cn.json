@@ -1,0 +1,57 @@
+{
+  "welcome": {
+    "title": "享受自己喜歡的音樂",
+    "description": [
+      "Apple Music 提供的所有歌曲都可以在此網站上輕鬆快速搜索",
+      "你也可以回來聽你想要的歌"
+    ],
+    "card": [{
+      "title": "各种流派",
+      "description": "鏈接到超過1000首音樂的iTunes"
+    }, {
+      "title": "高速",
+      "description": "Apple Music 提供快速准确的搜索引擎"
+    }, {
+      "title": "保存喜欢的音乐",
+      "description": "您可以保存自己喜欢的音乐并随时复出"
+    }]
+  },
+  "menu":  {
+    "header": "设置",
+    "list": [
+      {
+        "title": "歌曲类型",
+        "item": ["歌曲", "电视剧", "专辑", "音乐视频"]
+      }, {
+        "title": "每页内容"
+      }, {
+        "title": "列数"
+      }, {
+        "title": "语",
+        "item": ["英语", "韓語", "漢語"]
+      }
+    ]
+  },
+  "main": {
+    "header": {
+      "search": "搜索結果 : ",
+      "alert": "已經是第一頁了"
+    }
+  },
+  "favorite": {
+    "btn": {
+      "save": "保存",
+      "load": "招來"
+    },
+    "notice": {
+      "title": "未找到任何项目",
+      "advice": "建议 :",
+      "description": ["您需要添加至少一首音乐", "查看此页面上的一些内容"],
+      "btn": "返回主目录"
+    },
+    "alert": {
+      "save": "你想保存你最喜欢的项目吗?",
+      "load": "你想加载你最喜欢的项目吗?"
+    }
+  }
+}
