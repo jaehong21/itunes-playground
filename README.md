@@ -1,5 +1,6 @@
 # iTunes-Playground 
-This README.md provides you a short guideline of this page and what kind of elements are used to make this simple project. <br />
+This README.md provides you a short guideline of this page and <br />
+what kind of elements are used to make this simple project. <br />
 
 <br /> 
 
